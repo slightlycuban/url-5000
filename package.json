@@ -1,0 +1,26 @@
+{
+  "name": "url-5000",
+  "version": "1.0.0",
+  "description": "A url shortener that is easier to remember",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slightlycuban/url-5000.git"
+  },
+  "author": "Michael Tracy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/slightlycuban/url-5000/issues"
+  },
+  "homepage": "https://github.com/slightlycuban/url-5000#readme",
+  "dependencies": {
+    "good": "^7.0.1",
+    "good-console": "^6.1.2",
+    "good-squeeze": "^3.0.1",
+    "hapi": "^13.4.1",
+    "hapi-router": "^3.5.0"
+  }
+}
