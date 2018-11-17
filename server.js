@@ -1,20 +1,12 @@
 const server = require('./src');
 const plugins = require('./src/plugins');
-const handlebars = require('handlebars');
+const config = require('./src/config');
 
 async function start() {
 
   await server.register(plugins);
 
-  server.views({
-    engines: {
-      html: handlebars
-    },
-    relativeTo: __dirname,
-    path: './templates',
-    layout: true,
-    layoutPath: './templates/layouts'
-  });
+  server.views(config.views);
 
   try {
     await server.start();
