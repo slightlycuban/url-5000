@@ -1,7 +1,5 @@
-'use strict';
-
 module.exports = {
-  create(request, reply) {
+  create(_, reply) {
     reply.view('short', { url: '#' });
   }
 };
