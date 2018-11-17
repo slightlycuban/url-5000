@@ -4,7 +4,8 @@
   "description": "A url shortener that is easier to remember",
   "main": "server.js",
   "scripts": {
-    "test": "./node_modules/lab/bin/lab -c"
+    "test": "lab -c",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -17,17 +18,18 @@
   },
   "homepage": "https://github.com/slightlycuban/url-5000#readme",
   "dependencies": {
-    "good": "^7.0.1",
-    "good-console": "^6.1.2",
-    "good-squeeze": "^3.0.1",
-    "handlebars": "^4.0.5",
-    "hapi": "^13.4.1",
-    "hapi-router": "^3.5.0",
-    "vision": "^4.1.0"
+    "good": "^8.1.1",
+    "good-console": "^7.1.0",
+    "good-squeeze": "^5.1.0",
+    "handlebars": "^4.0.12",
+    "hapi": "^17.7.0",
+    "hapi-router": "^4.0.0",
+    "vision": "^5.4.3"
   },
   "devDependencies": {
-    "code": "^3.0.1",
-    "jsdom": "^9.2.1",
-    "lab": "^10.7.1"
+    "code": "^5.2.3",
+    "eslint": "^5.9.0",
+    "jsdom": "^13.0.0",
+    "lab": "^18.0.0"
   }
 }

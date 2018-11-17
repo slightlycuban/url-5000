@@ -1,7 +1,15 @@
-'use strict';
-
 const server = require('./src');
 
-server.start(() => {
-  console.log('Server running at:', server.info.uri);
-});
+async function start() {
+
+  try {
+    await server.provision();
+    await server.start();
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  console.info('Server running at:', server.info.uri);
+}
+
+start();

@@ -1,36 +1,14 @@
-'use strict';
-
 const Hapi = require('hapi');
-const logConfig = require('./config/log');
+const config = require('./config');
+const plugins = require('./plugins');
 
-const server = new Hapi.Server({
-  debug: {
-    request: ['error']
-  }
-});
+const server = Hapi.server(config.server);
 
-server.connection({ port: 3000 });
+async function provision() {
+  await server.register(plugins);
 
-server.register([{
-  register: require('good'),
-  options: logConfig
-}, {
-  register: require('vision')
-}, {
-  register: require('hapi-router'),
-  options: { routes: 'src/routes/*.js' }
-}], (err) => {
-  if (err) { throw err; }
+  server.views(config.views);
+}
 
-  server.views({
-    engines: {
-      html: require('handlebars')
-    },
-    relativeTo: __dirname,
-    path: './templates',
-    layout: true,
-    layoutPath: './templates/layouts'
-  });
-
-  module.exports = server;
-});
+module.exports = server;
+module.exports.provision = provision;
