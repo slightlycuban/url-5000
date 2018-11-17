@@ -25,7 +25,7 @@
     "hapi": "^17.7.0",
     "hapi-mongojs": "^3.0.1",
     "hapi-router": "^4.0.0",
-    "vision": "^4.1.0"
+    "vision": "^5.4.3"
   },
   "devDependencies": {
     "code": "^3.0.1",
