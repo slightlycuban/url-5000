@@ -1,39 +1,35 @@
-/*jshint expr: true */
-const Code = require('code');
-const Lab = require('lab');
-const expect = Code.expect;
-const lab = exports.lab = Lab.script();
+const { expect } = require('code');
+const lab = exports.lab = require('lab').script();
 const jsdom = require('jsdom');
+
+const { experiment, before, test } = lab;
 
 const server = require('../../src');
 
-lab.experiment('home', () => {
+experiment.skip('home', () => {
   var response;
 
-  lab.before((done) => {
-    server.inject({
+  before(() => {
+    return server.inject({
       method: 'GET',
       url: '/'
     }).then((res) => {
       response = res;
-      done();
-    }).catch(done);
+    });
   });
 
-  lab.test('returns a 200 response', (done) => {
+  test('returns a 200 response', () => {
     expect(response).to.be.ok;
     expect(response.statusCode).to.equal(200);
-    done();
   });
 
-  lab.test('has an h1 with the title "Short"', (done) => {
+  test('has an h1 with the title "Short"', () => {
     jsdom.env(response.payload, (err, window) => {
       expect(err).to.equal(null);
       expect(window).to.be.ok;
       var title = window.document.querySelector('h1');
       expect(title).to.be.ok;
       expect(title.innerHTML).to.equal('Short');
-      done();
     });
   });
 });
