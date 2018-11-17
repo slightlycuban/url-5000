@@ -6,24 +6,22 @@ const { experiment, before, test } = lab;
 
 const server = require('../../src');
 
-experiment.skip('home', () => {
-  var response;
+experiment('home', () => {
+  let response;
 
-  before(() => {
-    return server.inject({
+  before(async () => {
+    await server.provision();
+    response = await server.inject({
       method: 'GET',
       url: '/'
-    }).then((res) => {
-      response = res;
     });
   });
 
   test('returns a 200 response', () => {
-    expect(response).to.be.ok;
     expect(response.statusCode).to.equal(200);
   });
 
-  test('has an h1 with the title "Short"', () => {
+  test.skip('has an h1 with the title "Short"', () => {
     jsdom.env(response.payload, (err, window) => {
       expect(err).to.equal(null);
       expect(window).to.be.ok;
