@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/slightlycuban/url-5000#readme",
   "dependencies": {
-    "good": "^7.0.1",
-    "good-console": "^6.1.2",
+    "good": "^8.1.1",
+    "good-console": "^7.1.0",
     "good-squeeze": "^5.1.0",
     "handlebars": "^4.0.5",
     "hapi": "^17.7.0",
