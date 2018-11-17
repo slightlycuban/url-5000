@@ -4,7 +4,8 @@
   "description": "A url shortener that is easier to remember",
   "main": "server.js",
   "scripts": {
-    "test": "lab -c"
+    "test": "lab -c",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "code": "^3.0.1",
+    "eslint": "^5.9.0",
     "jsdom": "^9.2.1",
     "lab": "^10.7.1"
   }
