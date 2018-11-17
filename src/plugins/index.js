@@ -1,4 +1,3 @@
-//const mongo = require('hapi-mongojs');
 const config = require('../config');
 const Vision = require('vision');
 const router = require('hapi-router');
@@ -10,9 +9,6 @@ const plugins = [{
 }, {
   plugin: Vision,
   options: {},
-//}, {
-//  plugin: mongo,
-//  options: config.mongo,
 }, {
   plugin: router,
   options: { routes: 'src/routes/*.js' },
