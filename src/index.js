@@ -1,25 +1,25 @@
 'use strict';
 
 const Hapi = require('hapi');
-const logConfig = require('./config/log');
+const mongo = require('hapi-mongojs');
+const config = require('./config');
 
-const server = new Hapi.Server({
-  debug: {
-    request: ['error']
-  }
-});
+const server = Hapi.server(config.server);
 
-server.connection({ port: 3000 });
-
-server.register([{
+const plugins = [{
   register: require('good'),
-  options: logConfig
+  options: config.log,
 }, {
   register: require('vision')
 }, {
+  register: mongo,
+  options: config.mongo
+}, {
   register: require('hapi-router'),
   options: { routes: 'src/routes/*.js' }
-}], (err) => {
+}];
+
+server.register(plugins, (err) => {
   if (err) { throw err; }
 
   server.views({
@@ -32,5 +32,6 @@ server.register([{
     layoutPath: './templates/layouts'
   });
 
-  module.exports = server;
 });
+
+module.exports = server;
