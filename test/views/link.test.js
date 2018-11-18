@@ -1,24 +1,32 @@
 const lab = exports.lab = require('lab').script();
-const { experiment, before, test } = lab;
+const { experiment, before, after, test } = lab;
 const { expect } = require('code');
 const { JSDOM } = require('jsdom');
+const sinon = require('sinon').createSandbox();
 
 const server = require('../../src');
+const { links } = require('../../src/db');
 
 experiment('create', () => {
   before(async () => {
     await server.provision();
   });
 
+  after(() => {
+    sinon.restore();
+  });
+
   experiment('when I post a new url', () => {
     const mtracHash = 811125760;
+    const mtracUrl = 'http://mtrac.co';
     let response, window;
     before(async () => {
+      sinon.stub(links, 'createLink');
       response = await server.inject({
         method: 'POST',
         url: '/',
         payload: {
-          url: 'http://mtrac.co'
+          url: mtracUrl
         }
       });
       const dom = new JSDOM(response.payload);
@@ -37,6 +45,10 @@ experiment('create', () => {
 
     experiment('and then get said url', () => {
       before(async () => {
+        sinon.stub(links, 'getByHash').resolves({
+          url: mtracUrl,
+          hash: mtracHash
+        });
         response = await server.inject({
           method: 'GET',
           url: `/${mtracHash}`,
