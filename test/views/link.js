@@ -11,6 +11,7 @@ experiment('create', () => {
   });
 
   experiment('when I post a new url', () => {
+    const mtracHash = 811125760;
     let response, window;
     before(async () => {
       response = await server.inject({
@@ -31,7 +32,7 @@ experiment('create', () => {
     test('has an "a" tag with a url in it', () => {
       const anchor = window.document.querySelector('a');
       expect(anchor).to.be.ok;
-      expect(anchor.innerHTML).to.equal('#');
+      expect(anchor.innerHTML).to.equal(`http://localhost:3000/${mtracHash}`);
     });
   });
 });
