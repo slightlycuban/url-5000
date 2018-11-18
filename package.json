@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A url shortener that is easier to remember",
   "main": "server.js",
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
     "test": "lab -c",
     "lint": "eslint src"
