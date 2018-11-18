@@ -4,10 +4,13 @@ const plugins = require('./plugins');
 
 const server = Hapi.server(config.server);
 
+let ready = false;
 async function provision() {
-  await server.register(plugins);
-
-  server.views(config.views);
+  if (!ready) {
+    await server.register(plugins);
+    server.views(config.views);
+    ready = true;
+  }
 }
 
 module.exports = server;
