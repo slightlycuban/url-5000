@@ -1,5 +1,3 @@
-'use strict';
-
 const links = require('../handlers/link');
 
 module.exports = [{
