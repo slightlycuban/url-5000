@@ -34,5 +34,18 @@ experiment('create', () => {
       expect(anchor).to.be.ok;
       expect(anchor.innerHTML).to.equal(`http://localhost:3000/${mtracHash}`);
     });
+
+    experiment('and then get said url', () => {
+      before(async () => {
+        response = await server.inject({
+          method: 'GET',
+          url: `/${mtracHash}`,
+        });
+      });
+
+      test('should do a redirect', () => {
+        expect(response.statusCode).to.equal(302);
+      });
+    });
   });
 });
