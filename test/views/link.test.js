@@ -58,6 +58,10 @@ experiment('create', () => {
       test('should do a redirect', () => {
         expect(response.statusCode).to.equal(302);
       });
+
+      test('should lookup the link by has', () => {
+        sinon.assert.calledWith(links.getByHash, mtracHash);
+      });
     });
   });
 });
