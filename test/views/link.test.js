@@ -9,6 +9,8 @@ const { links } = require('../../src/db');
 
 experiment('create', () => {
   before(async () => {
+    sinon.stub(links, 'createLink');
+    sinon.stub(links, 'getByHash');
     await server.provision();
   });
 
@@ -21,7 +23,6 @@ experiment('create', () => {
     const mtracUrl = 'http://mtrac.co';
     let response, window;
     before(async () => {
-      sinon.stub(links, 'createLink');
       response = await server.inject({
         method: 'POST',
         url: '/',
@@ -45,7 +46,7 @@ experiment('create', () => {
 
     experiment('and then get said url', () => {
       before(async () => {
-        sinon.stub(links, 'getByHash').resolves({
+        links.getByHash.resolves({
           url: mtracUrl,
           hash: mtracHash
         });
@@ -59,8 +60,23 @@ experiment('create', () => {
         expect(response.statusCode).to.equal(302);
       });
 
-      test('should lookup the link by has', () => {
+      test('should lookup the link by hash', () => {
         sinon.assert.calledWith(links.getByHash, mtracHash);
+      });
+    });
+
+    experiment('and then get a different url', () => {
+      const exampleHash = 8005554444;
+      before(async () => {
+        links.getByHash.resolves(undefined);
+        response = await server.inject({
+          method: 'GET',
+          url: `/${exampleHash}`,
+        });
+      });
+
+      test('should reply with 404/Not Found', () => {
+        expect(response.statusCode).to.equal(404);
       });
     });
   });
