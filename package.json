@@ -26,6 +26,7 @@
     "good-squeeze": "^5.1.0",
     "handlebars": "^4.0.12",
     "hapi": "^17.7.0",
+    "hapi-error": "^2.1.0",
     "hapi-router": "^4.0.0",
     "joi": "^14.1.0",
     "mongodb": "^3.1.10",
