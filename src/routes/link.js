@@ -1,7 +1,7 @@
 const links = require('../handlers/link');
 
 module.exports = [{
-  path: '/',
+  path: '/link',
   method: 'POST',
   handler: links.create
 }, {

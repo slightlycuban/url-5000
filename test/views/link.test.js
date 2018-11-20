@@ -25,7 +25,7 @@ experiment('create', () => {
     before(async () => {
       response = await server.inject({
         method: 'POST',
-        url: '/',
+        url: '/link',
         payload: {
           url: mtracUrl
         }
