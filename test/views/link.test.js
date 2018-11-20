@@ -18,6 +18,23 @@ experiment('create', () => {
     sinon.restore();
   });
 
+  experiment('when I post an invalid url', () => {
+    let response;
+    before(async () => {
+      response = await server.inject({
+        method: 'POST',
+        url: '/link',
+        payload: {
+          url: 'I\'m a little teapot'
+        }
+      });
+    });
+
+    test('returns a 400 response', () => {
+      expect(response.statusCode).to.equal(400);
+    });
+  });
+
   experiment('when I post a new url', () => {
     const mtracHash = 811125760;
     const mtracUrl = 'http://mtrac.co';
@@ -25,7 +42,7 @@ experiment('create', () => {
     before(async () => {
       response = await server.inject({
         method: 'POST',
-        url: '/',
+        url: '/link',
         payload: {
           url: mtracUrl
         }
