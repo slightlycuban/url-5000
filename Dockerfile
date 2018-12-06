@@ -4,7 +4,7 @@ ARG MONGO_HOST=mongo
 ENV MONGO_URL=mongodb://${MONGO_HOST}:27017 \
     PORT=80 \
     HOST=0.0.0.0
-EXPOSE ${PORT}
+EXPOSE 80
 
 WORKDIR /opt/short
 COPY . .
